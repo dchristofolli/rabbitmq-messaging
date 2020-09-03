@@ -2,22 +2,15 @@ package com.dchristofolli.messagingrabbitmq.receiver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
-import java.util.concurrent.CountDownLatch;
-
-@Component
+@RabbitListener(queues = "message-boot")
 public class Receiver {
     private final Logger log = LoggerFactory.getLogger(Receiver.class);
-    private final CountDownLatch latch = new CountDownLatch(1);
 
-    public void receiveMessage(String message) {
-        log.info("Received <{}>", message);
-        latch.countDown();
+    @RabbitHandler
+    public void receive(String message) {
+        log.info(message);
     }
-
-    public CountDownLatch getLatch() {
-        return latch;
-    }
-
 }
