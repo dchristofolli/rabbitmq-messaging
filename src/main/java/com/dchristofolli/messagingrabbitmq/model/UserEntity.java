@@ -3,14 +3,18 @@ package com.dchristofolli.messagingrabbitmq.model;
 import java.io.Serializable;
 
 public class UserEntity implements Serializable {
-    private static final long serialVersionUID = 7216203701057878501L;
     private String id;
     private String name;
     private String cpf;
     private String email;
     private String password;
 
-    public UserEntity() {
+    public UserEntity(String id, String name, String cpf, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
     }
 
     public String getId() {

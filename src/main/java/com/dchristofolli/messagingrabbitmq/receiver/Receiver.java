@@ -1,20 +1,22 @@
 package com.dchristofolli.messagingrabbitmq.receiver;
 
-import com.dchristofolli.messagingrabbitmq.model.UserEntity;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
 
-@RabbitListener(queues = "${rabbitmq.queueName}")
+@Service
 public class Receiver {
-    private final Logger log = LoggerFactory.getLogger(Receiver.class);
-    Gson gson;
+    private static final Logger log = LoggerFactory.getLogger(Receiver.class);
 
-    @RabbitHandler
-    public void receive(UserEntity userEntity) {
-//        Message msg = gson.fromJson(userEntity, Message.class);
-        log.info(userEntity.toString());
+    @RabbitListener(queues = "${rabbitmq.genericQueueName}")
+    public void receiveMessage(final Message message) {
+        log.info("Received message as generic: {}", message);
+    }
+
+    @RabbitListener(queues = "${rabbitmq.specificQueueName}")
+    public void receiveMessage(final String customMessage) {
+        log.info("Received message as specific class: {}", customMessage);
     }
 }
