@@ -1,7 +1,7 @@
 spring:
   profiles:
     active: receiver
-  rabbitmq:
-    listener:
-      direct:
-        missing-queues-fatal: false
+rabbitmq:
+  queueName: spring-boot
+  exchangeName: spring-boot-exchange
+  routingKey: foo.bar.#
