@@ -1,7 +1,19 @@
-version: "3.6"
+version: "3"
 services:
   rabbitmq:
     image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /temp/mongo-data:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
