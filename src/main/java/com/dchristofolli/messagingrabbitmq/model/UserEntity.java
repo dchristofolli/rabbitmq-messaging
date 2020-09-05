@@ -3,18 +3,16 @@ package com.dchristofolli.messagingrabbitmq.model;
 import java.io.Serializable;
 
 public class UserEntity implements Serializable {
-    private String id;
-    private String name;
-    private String cpf;
-    private String email;
-    private String password;
+    private final String id;
+    private final String name;
+    private final String cpf;
+    private final String email;
 
-    public UserEntity(String id, String name, String cpf, String email, String password) {
+    public UserEntity(String id, String name, String cpf, String email) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.email = email;
-        this.password = password;
     }
 
     public String getId() {
@@ -33,9 +31,6 @@ public class UserEntity implements Serializable {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     @Override
     public String toString() {
@@ -44,7 +39,6 @@ public class UserEntity implements Serializable {
             ", name='" + name + '\'' +
             ", cpf='" + cpf + '\'' +
             ", email='" + email + '\'' +
-            ", password='" + password + '\'' +
             '}';
     }
 }
