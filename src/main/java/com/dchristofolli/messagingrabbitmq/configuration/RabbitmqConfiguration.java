@@ -19,6 +19,9 @@ public class RabbitmqConfiguration {
     @Value("${rabbitmq.specificQueueName}")
     private String specificQueueName;
 
+    @Value("${rabbitmq.responseQueueName}")
+    private String responseQueueName;
+
     @Value("${rabbitmq.routingKey}")
     private String routingKey;
 
@@ -30,6 +33,11 @@ public class RabbitmqConfiguration {
     @Bean
     public Queue appQueueSpecific() {
         return new Queue(specificQueueName);
+    }
+
+    @Bean
+    public Queue responseQueueName(){
+        return new Queue(responseQueueName);
     }
 
     @Bean

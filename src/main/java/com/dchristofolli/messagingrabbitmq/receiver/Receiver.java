@@ -5,6 +5,7 @@ import com.dchristofolli.messagingrabbitmq.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,10 +18,9 @@ public class Receiver {
     }
 
     @RabbitListener(queues = "${rabbitmq.specificQueueName}")
-    public void receiveMessage(final UserEntity userEntity) {
+    @SendTo("${rabbitmq.responseQueueName}")
+    public UserEntity receiveMessage(final UserEntity userEntity) {
         log.info("Received message as specific class: {}", userEntity);
-        userRepository.save(userEntity);
+        return userRepository.save(userEntity);
     }
-
-
 }
