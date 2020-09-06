@@ -16,9 +16,6 @@ public class RabbitmqConfiguration {
     @Value("${rabbitmq.exchangeName}")
     private String exchangeName;
 
-    @Value("${rabbitmq.genericQueueName}")
-    private String genericQueueName;
-
     @Value("${rabbitmq.specificQueueName}")
     private String specificQueueName;
 
@@ -31,18 +28,8 @@ public class RabbitmqConfiguration {
     }
 
     @Bean
-    public Queue appQueueGeneric() {
-        return new Queue(genericQueueName);
-    }
-
-    @Bean
     public Queue appQueueSpecific() {
         return new Queue(specificQueueName);
-    }
-
-    @Bean
-    public Binding declareBindingGeneric() {
-        return BindingBuilder.bind(appQueueGeneric()).to(appExchange()).with(routingKey);
     }
 
     @Bean
