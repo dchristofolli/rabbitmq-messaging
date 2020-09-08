@@ -36,9 +36,10 @@ public class RabbitmqConfiguration {
     }
 
     @Bean
-    public Queue responseQueueName(){
+    public Queue responseQueue() {
         return new Queue(responseQueueName);
     }
+
 
     @Bean
     public Binding declareBindingSpecific() {

@@ -20,7 +20,7 @@ public class Receiver {
     @RabbitListener(queues = "${rabbitmq.specificQueueName}")
     @SendTo("${rabbitmq.responseQueueName}")
     public UserEntity receiveMessage(final UserEntity userEntity) {
-        log.info("Received message as specific class: {}", userEntity);
+        log.info("Received User: {}", userEntity);
         return userRepository.save(userEntity);
     }
 }
